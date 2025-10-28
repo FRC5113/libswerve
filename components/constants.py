@@ -8,7 +8,7 @@ from phoenix6.swerve import (
 )
 from phoenix6.configs import TalonFXConfiguration, CurrentLimitsConfigs
 from wpimath.geometry import Translation2d
-from wpimath.units import amperes, kilogram_square_meters, volts
+from wpimath.units import amperes, kilogram_square_meters, volts,inchesToMeters
 import json
 
 class LemonSwerveConstants:
@@ -22,7 +22,7 @@ class LemonSwerveConstants:
             SwerveModuleConstantsFactory()
             .with_drive_motor_gear_ratio(opts["SwerveModuleConfiguration"]["DriveRatio"])
             .with_steer_motor_gear_ratio(opts["SwerveModuleConfiguration"]["SteerRatio"])
-            .with_wheel_radius(opts["WheelRadiusInches"] / 39.37)  # inches to meters
+            .with_wheel_radius(inchesToMeters(opts["WheelRadiusInches"]))  # inches to meters
             .with_coupling_gear_ratio(opts["SwerveModuleConfiguration"]["CouplingRatio"])
             .with_steer_motor_closed_loop_output(ClosedLoopOutputType.VOLTAGE)
             .with_drive_motor_closed_loop_output(ClosedLoopOutputType.VOLTAGE)
