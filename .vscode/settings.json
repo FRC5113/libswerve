@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "CANCODER",
+        "libswerve",
         "pycache"
     ],
     "python.REPL.enableREPLSmartSend": false
