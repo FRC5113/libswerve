@@ -1,13 +1,14 @@
 from lemonlib import LemonRobot
 from lemonlib import LemonInput
 from components.drivetrain import LemonSwerve
-class Main(LemonRobot):
+class MyRobot(LemonRobot):
     drivetrain: LemonSwerve
     joystick: LemonInput
-    def __init__(self):
+    def createObjects(self):
         self.drivetrain = LemonSwerve("constants.json")
-        self.joystic = LemonInput(0)
+        self.joystick = LemonInput(0)
     def teleopPeriodic(self):
         vX = self.joystick.getLeftX()
-        vY = self.joystic.getLeftY()
-        self.drivetrain.drive(vX, vY, 0, "field")
+        vY = self.joystick.getLeftY()
+        rotations = self.joystick.getRightX() #not sure I like this
+        self.drivetrain.drive(vX, vY, rotations, "field")

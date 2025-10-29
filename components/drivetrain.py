@@ -1,7 +1,7 @@
 from phoenix6.swerve import SwerveDrivetrain
 from phoenix6.swerve.requests import FieldCentric, ForwardPerspectiveValue, RobotCentric
 from phoenix6 import hardware
-from constants import LemonSwerveConstants
+from .constants import LemonSwerveConstants
 from wpimath.units import meters_per_second, radians_per_second
 from typing import Literal
 
@@ -44,4 +44,3 @@ class LemonSwerve:
             self.drive_field_centric(vX, vY, rotations)
         else:
             self.drive_robot_centric(vX, vY, rotations)
-s = LemonSwerve("constants.json")

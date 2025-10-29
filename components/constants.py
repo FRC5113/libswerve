@@ -10,7 +10,7 @@ from phoenix6.configs import TalonFXConfiguration, CurrentLimitsConfigs
 from wpimath.geometry import Translation2d
 from wpimath.units import amperes, kilogram_square_meters, volts,inchesToMeters
 import json
-
+import os
 class LemonSwerveConstants:
     def _init_constants(self, module_number: int, module_key: str) -> SwerveModuleConstants:
         mod = self.constants["Modules"][module_number]
@@ -52,9 +52,12 @@ class LemonSwerveConstants:
         )
 
     def __init__(self, path: str):
-        with open(path, "r") as f:
-            self.constants = json.load(f)
-
+        try:
+            with open(path, "r") as f:
+                self.constants = json.load(f)
+        except:
+            print(f"Failed to open path, running from {os.getcwd()}")
+            raise
         opts = self.constants["SwerveOptions"]
 
         self.DRIVETRAIN = (
