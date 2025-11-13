@@ -1,13 +1,13 @@
 from phoenix6.swerve import SwerveDrivetrain
-from phoenix6.swerve.requests import FieldCentric, ForwardPerspectiveValue, RobotCentric
-from phoenix6 import hardware
+from phoenix6.swerve.requests import *
+from phoenix6 import *
+from phoenix6.swerve import *
+from phoenix6.configs import *
 from .constants import LemonSwerveConstants
 from wpimath.units import meters_per_second, radians_per_second
 from typing import Literal
 from lemonlib.smart import SmartPreference,SmartProfile
 class LemonSwerve:
-    def temp():
-        pass
     def setup(self):
         self.constants = LemonSwerveConstants()
         self.foo = SmartPreference(4)
@@ -28,7 +28,16 @@ class LemonSwerve:
 
     def on_enable(self):
         self.steer_controller = self.constants.steer_profile.create_ctre_turret_controller()
-        self.drive_controler = self.constants.drive_profile.create_ctre_turret_controller()        
+        self.drive_controller = self.constants.drive_profile.create_ctre_turret_controller()
+        steer_config = TalonFXConfiguration().with_slot0(self.steer_controller)
+        drive_config = TalonFXConfiguration().with_slot0(self.drive_controller)
+        for i in range(0, 4):
+            module = self.drivetrain.get_module(i)
+            drive = module.drive_motor
+            steer = module.steer_motor
+            drive.configurator.apply(drive_config)
+            steer.configurator.apply(steer_config)
+
 
     def drive_field_centric(self, vX: meters_per_second, vY: meters_per_second, rotations: radians_per_second) -> None:
         request = (

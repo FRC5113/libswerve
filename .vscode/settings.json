@@ -1,9 +1,12 @@
 {
     "cSpell.words": [
         "CANCODER",
+        "ctre",
+        "lemonlib",
         "libswerve",
         "pycache",
-        "teleop"
+        "teleop",
+        "wpimath"
     ],
     "python.REPL.enableREPLSmartSend": false
 }
